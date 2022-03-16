@@ -8,9 +8,7 @@ pipeline{
     stages {
       stage('Hello') {
          steps {
-            def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
-            env.Path = "${tfHome};${env.Path}"
-            bat 'terraform --version'
+            bat "${tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'}\terraform --version"
             echo 'Hello World'
          }
       }

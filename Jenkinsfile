@@ -6,7 +6,15 @@ pipeline{
         PATH = "$TF_HOME:$PATH"
     }
     stages {
-    
+      stage('Hello') {
+         steps {
+            def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
+            env.Path = "${tfHome};${env.Path}"
+            bat 'terraform --version'
+            echo 'Hello World'
+         }
+      }
+   
         stage('Terraform Init'){
             
             steps {

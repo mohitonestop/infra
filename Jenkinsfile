@@ -42,7 +42,10 @@ pipeline{
                 ), string(credentialsId: 'Azure-SA-tf', variable: 'ARM_ACCESS_KEY')]) {
                         
                         bat """
-                                
+                        export client_id=%ARM_CLIENT_ID%
+                        export client_secret=%ARM_CLIENT_SECRET%
+                        export subscription_id=%ARM_SUBSCRIPTION_ID%
+                        export tenant_id=%ARM_TENANT_ID%
                         C:\\terraform\\terraform.exe validate 
                         """
                            }

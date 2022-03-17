@@ -67,9 +67,9 @@ resource "azurerm_app_service" "app-service" {
 }
 
 resource "azurerm_mysql_database" "DB" {
-  name                = $(var.db_name)
+  name                = "${var.db_name}"
   resource_group_name = "ResWP"
-  server_name         = ${var.db_host}
+  server_name         = "${var.db_host}"
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 }

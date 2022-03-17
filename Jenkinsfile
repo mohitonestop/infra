@@ -43,7 +43,7 @@ pipeline{
                         
                         bat """
                                 
-                        C:\\terraform\\terraform.exe validate
+                        C:\\terraform\\terraform.exe validate -var "client_id=%ARM_CLIENT_ID%" -var "client_secret=%ARM_CLIENT_SECRET%" -var "subscription_id=%ARM_SUBSCRIPTION_ID%" -var "tenant_id=%ARM_TENANT_ID%"
                         """
                            }
                     }

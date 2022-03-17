@@ -1,14 +1,22 @@
 pipeline{
     agent any 
+    #tools {
+    #    "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform"
+    #}
+    environment {
+        terraform="C:\\terraform\\terraform.exe"
+        #TF_HOME = tool('terraform')
+        TF_IN_AUTOMATION = "true"
+        PATH = "$terraform:$PATH"
+    }
     stages {
-      stage('Hello') {
-         steps {
-            bat "${tool name: 'Terraform', type: 'org.jenkins-ci.plugins:terraform:TerraformInstallation'}\terraform --version"
-            echo 'Hello World'
-         }
-      }
-   
-        stage('Terraform Init'){
+      #stage('Hello') {
+      #   steps {
+      #      bat "${tool name: 'Terraform', type: 'org.jenkins-ci.plugins:terraform:TerraformInstallation'}\terraform --version"
+      #      echo 'Hello World'
+      #   }
+      #}
+       stage('Terraform Init'){
             
             steps {
                     ansiColor('xterm') {

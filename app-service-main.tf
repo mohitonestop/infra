@@ -36,7 +36,7 @@ resource "azurerm_app_service_plan" "service-plan" {
 
 # Create the App Service
 resource "azurerm_app_service" "app-service" {
-  name                = "${var.az_app_name}"
+  name                = "${var.az_app_name}-%BUILD_NUMBER%"
   location            = azurerm_resource_group.appservice-rg.location
   resource_group_name = azurerm_resource_group.appservice-rg.name
   app_service_plan_id = azurerm_app_service_plan.service-plan.id
@@ -67,7 +67,7 @@ resource "azurerm_app_service" "app-service" {
 }
 
 resource "azurerm_mysql_database" "DB" {
-  name                = "${var.db_name}"
+  name                = "${var.db_name}-%BUILD_NUMBER%"
   resource_group_name = "ResWP"
   server_name         = "${var.db_host}"
   charset             = "utf8"

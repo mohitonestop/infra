@@ -82,12 +82,12 @@ resource "azurerm_mysql_database" "DB" {
 #  collation           = "utf8_unicode_ci"
 #}
 
-#resource "null_resource" "webjob" {
-#  provisioner "local-exec" {
-#    when = create   
-#    command = "az webapp deployment source config-zip -g 'poc-eastus-poc-poc-app-app-service-rg' -n 'poc-eastus-poc-poc-app-app-service' --src './datum-wp.zip'"
-    
-#  }
+resource "null_resource" "webjob" {
+  provisioner "local-exec" {
+    when = create   
+    command = "az webapp deployment source config-zip -g azurerm_resource_group.appservice-rg.name -n '${var.az_app_name}1008' --src '${var.az_app_path}'"
+
+  }
   
-#  depends_on = [ azurerm_app_service.app-service ]
-#}
+  depends_on = [ azurerm_app_service.app-service ]
+}

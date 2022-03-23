@@ -119,3 +119,8 @@ variable "tenant_id" {
     description =   "Tenant ID"
     type        =   string
 }
+
+variable "az_app_path" {
+    description =  "az_app_path"
+    type        =  string
+}

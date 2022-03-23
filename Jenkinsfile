@@ -7,6 +7,17 @@ pipeline{
         PATH = "$terraform:$PATH"
     }
     stages {
+            stage('Clean'){
+                 cleanWs()
+            }
+            stage('Wordpress download'){
+                steps {
+                      // git url: 'https://github.com/WordPress/WordPress.git'
+                      script {
+                          bat 'C:\\Windows\\System32\\curl.exe -k --noproxy \"*\" "https://wordpress.org/latest.zip" -o "Wordpress.zip"'
+                      }
+                }
+            }       
             stage('Terraform Init'){
             
             steps {

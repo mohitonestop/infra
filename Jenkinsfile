@@ -7,11 +7,11 @@ pipeline{
         PATH = "$terraform:$PATH"
     }
     stages {
-            stage('Clean'){
-                steps{
-                    cleanWs()
-                }
-            }
+            //stage('Clean'){
+            //    steps{
+            //        cleanWs()
+            //    }
+            //}
             stage('Wordpress download'){
                 steps {
                       // git url: 'https://github.com/WordPress/WordPress.git'

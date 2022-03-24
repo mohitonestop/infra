@@ -8,7 +8,9 @@ pipeline{
     }
     stages {
             stage('Clean'){
-                 cleanWs()
+                steps{
+                    cleanWs()
+                }
             }
             stage('Wordpress download'){
                 steps {

@@ -85,7 +85,7 @@ resource "azurerm_mysql_database" "DB" {
 resource "null_resource" "webjob" {
   provisioner "local-exec" {
     when = create   
-    command = "az webapp deployment source config-zip -g azurerm_resource_group.appservice-rg.name -n '${var.az_app_name}1008' --src '${var.az_app_path}'"
+    command = "azurerm webapp deployment source config-zip -g azurerm_resource_group.appservice-rg.name -n '${var.az_app_name}1008' --src '${var.az_app_path}'"
 
   }
   

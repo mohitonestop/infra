@@ -126,9 +126,6 @@ pipeline{
                         "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" webapp deployment source config-zip -g DEVWP -n child-app-1009 --src Wordpress.zip"
                     '''
                 }
-                // get publish settings
-      def pubProfilesJson = bat script: "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az webapp deployment list-publishing-profiles -g DEVWP -n child-app-1009", returnStdout: true
-      bat script: "echo pubProfilesJson"
             }
         }
         

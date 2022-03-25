@@ -119,7 +119,7 @@ pipeline{
                 script { 
                     // login Azure
                     bat '''  
-                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" login --service-principal -u %AZURE_CRED_USR% -p %AZURE_CRED_PSW% -t %AZURE_SP_TENANT_ID% '''
+                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" login --service-principal -u %AZURE_SP_CLIENT_ID% -p %AZURE_SP_CLIENT_SECRET% -t %AZURE_SP_TENANT_ID% '''
                     bat '''
                         "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" account set -s %AZURE_SP_SUBSCRIPTION_ID% '''
                     bat '''  

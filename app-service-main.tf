@@ -36,7 +36,7 @@ resource "azurerm_app_service_plan" "service-plan" {
 
 # Create the App Service
 resource "azurerm_app_service" "app-service" {
-  name                = "${var.az_app_name}1008"
+  name                = "${var.az_app_name}1009"
   location            = azurerm_resource_group.appservice-rg.location
   resource_group_name = azurerm_resource_group.appservice-rg.name
   app_service_plan_id = azurerm_app_service_plan.service-plan.id
@@ -67,7 +67,7 @@ resource "azurerm_app_service" "app-service" {
 }
 
 resource "azurerm_mysql_database" "DB" {
-  name                = "${var.db_name}1008"
+  name                = "${var.db_name}1009"
   resource_group_name = "ResWP"
   server_name         = "${var.db_host}"
   charset             = "utf8"
@@ -82,12 +82,12 @@ resource "azurerm_mysql_database" "DB" {
 #  collation           = "utf8_unicode_ci"
 #}
 
-resource "null_resource" "webjob" {
-  provisioner "local-exec" {
-    when = create   
-    command = "azurerm webapp deployment source config-zip -g azurerm_resource_group.appservice-rg.name -n '${var.az_app_name}1008' --src '${var.az_app_path}'"
+#resource "null_resource" "webjob" {
+#  provisioner "local-exec" {
+#    when = create   
+#    command = "azurerm webapp deployment source config-zip -g azurerm_resource_group.appservice-rg.name -n '${var.az_app_name}1008' --src '${var.az_app_path}'"
 
-  }
+#  }
   
-  depends_on = [ azurerm_app_service.app-service ]
-}
+#  depends_on = [ azurerm_app_service.app-service ]
+#}

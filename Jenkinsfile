@@ -123,7 +123,7 @@ pipeline{
                     bat '''
                         "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" account set -s %AZURE_SP_SUBSCRIPTION_ID% '''
                     bat '''  
-                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" webapp deployment source config-zip -g DEVWP -n child-app-1009 --src 'Wordpress.zip'"
+                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" webapp deployment source config-zip -g DEVWP -n child-app-1009 --src Wordpress.zip"
                     '''
                 }
             }

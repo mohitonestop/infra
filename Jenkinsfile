@@ -5,6 +5,7 @@ pipeline{
         terraform="C:\\terraform\\terraform.exe"
         TF_IN_AUTOMATION = "true"
         PATH = "$terraform:$PATH"
+        AZURE_SP = credentials('Azure-service-principal')
     }
     stages {
             //stage('Clean'){
@@ -92,7 +93,6 @@ pipeline{
             }
         
         }
-    
 
         stage('Terraform Apply'){
             steps {
@@ -103,17 +103,32 @@ pipeline{
                     clientIdVariable: 'ARM_CLIENT_ID',
                     clientSecretVariable: 'ARM_CLIENT_SECRET',
                     tenantIdVariable: 'ARM_TENANT_ID'
-                ), string(credentialsId: 'Azure-SA-tf', variable: 'ARM_ACCESS_KEY')]) {
+                    ), string(credentialsId: 'Azure-SA-tf', variable: 'ARM_ACCESS_KEY')]) {
 
                         bat """
                         echo "Applying the plan"
                         C:\\terraform\\terraform.exe apply -auto-approve -var "client_id=%ARM_CLIENT_ID%" -var "client_secret=%ARM_CLIENT_SECRET%" -var "subscription_id=%ARM_SUBSCRIPTION_ID%" -var "tenant_id=%ARM_TENANT_ID%"
                         """
-                                }
+                    }
                 }
             }
         }
-
+        
+        stage('deploy') {
+            steps {
+                script { 
+                    // login Azure
+                    bat '''  
+                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" login --service-principal -u %AZURE_CRED_USR% -p %AZURE_CRED_PSW% -t %AZURE_SP_TENANT_ID% '''
+                    bat '''
+                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" account set -s %AZURE_SP_SUBSCRIPTION_ID% '''
+                    bat '''  
+                        "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin\\az" logout
+                    '''
+                }
+            }
+        }
+        
         stage('Waiting for Remove Approval'){
             steps {
                 timeout(time: 15, unit: 'MINUTES') {
@@ -122,7 +137,6 @@ pipeline{
             }
         
         }
-    
 
         stage('Terraform destroy'){
             steps {
